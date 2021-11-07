@@ -37,14 +37,14 @@ type Config struct {
 var Cfg Config
 
 func ReadToml(fileName string) Config {
-	cfg_file, file_err := os.ReadFile(fileName)
-	if file_err != nil {
-		panic(file_err)
+	file, err := os.ReadFile(fileName)
+	if file != nil {
+		panic(err)
 	}
 
-	toml_err := toml.Unmarshal([]byte(cfg_file), &Cfg)
-	if toml_err != nil {
-		panic(toml_err)
+	err = toml.Unmarshal([]byte(file), &Cfg)
+	if err != nil {
+		panic(err)
 	}
 
 	return Cfg
